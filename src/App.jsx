@@ -9,21 +9,17 @@ function App() {
   const pages = {
     home: <HomePage />,
     about: <AboutPage />,
-    services: <ServicesPage />,
+    activities: <ActivitiesPage />,
     contact: <ContactPage />,
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      {/* <div className="flex flex-1"> */}
-        {/* <div className="flex flex-row w-full"> */}
-          <Menu activePage={activePage} setActivePage={setActivePage} />
-          <main className="flex-1 p-6 bg-gray-50">
+      <Menu activePage={activePage} setActivePage={setActivePage} />
+      <main className="flex-1 p-6 bg-gray-50">
             {pages[activePage] || <HomePage />}
           </main>
-        {/* </div> */}
-      {/* </div> */}
       <Footer />
     </div>
   );
@@ -48,11 +44,12 @@ function AboutPage() {
   );
 }
 
-function ServicesPage() {
+function ActivitiesPage() {
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-4">Our Services</h1>
-      <p className="text-gray-700">Discover the services we offer to our clients.</p>
+      <h1 className="text-3xl font-bold mb-4">Activities</h1>
+      <p className="text-gray-700">Explore the various activities we offer.</p>
+      {/* You can add more content related to activities here */}
     </div>
   );
 }
