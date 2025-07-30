@@ -1,58 +1,69 @@
-import Feature from '@components/Feature';
-import Footer from '@components/Footer';
-import logo from '@images/logo.png';
+import { useState } from 'react';
+import Header from './components/Header';
+import Menu from './components/Menu';
+import Footer from './components/Footer';
 
-const features = [
-  {
-    title: 'npm run start',
-    description: 'Run the React app in development mode with live reloading.',
-  },
-  {
-    title: 'npm run build',
-    description: 'Bundles the React app for deployment in production environment.',
-  },
-  {
-    title: 'npm run inline',
-    description: 'Inline all CSS and JS in a single minfied file.',
-  },
-];
+function App() {
+  const [activePage, setActivePage] = useState('home');
 
-const App = () => (
-  <div className='flex min-h-screen flex-col justify-center bg-gray-100 py-6 sm:py-12'>
-    <div className='relative py-3 sm:mx-auto sm:max-w-xl'>
-      <div className='to-light-blue-500 absolute inset-0 -skew-y-6 transform bg-gradient-to-r from-cyan-400 shadow-lg sm:-rotate-6 sm:skew-y-0 sm:rounded-3xl' />
-      <div className='relative bg-white px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20'>
-        <div className='mx-auto max-w-md'>
-          <div>
-            <a href='https://digitalinspiration.com/'>
-              <img src={logo} className='h-7 sm:h-8' alt='Logo' />
-            </a>
-          </div>
-          <div className='divide-y divide-gray-200'>
-            <div className='space-y-5 py-8 text-base leading-6 text-gray-700 sm:text-lg sm:leading-7'>
-              <h1 className='text-lg font-semibold text-cyan-600'>
-                React and Tailwind CSS Starter Kit
-              </h1>
-              <p>Create a React project with Vite and Tailwind CSS.</p>
-              <div className='list-disc space-y-2'>
-                {features.map((feature) => (
-                  <Feature
-                    key={feature.title}
-                    title={feature.title}
-                    description={feature.description}
-                  />
-                ))}
-              </div>
-              <p className='text-sm font-medium text-cyan-500'>
-                Built with Tailwind CSS 4 and React 19.
-              </p>
-            </div>
-            <Footer />
-          </div>
-        </div>
-      </div>
+  const pages = {
+    home: <HomePage />,
+    about: <AboutPage />,
+    services: <ServicesPage />,
+    contact: <ContactPage />,
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      {/* <div className="flex flex-1"> */}
+        {/* <div className="flex flex-row w-full"> */}
+          <Menu activePage={activePage} setActivePage={setActivePage} />
+          <main className="flex-1 p-6 bg-gray-50">
+            {pages[activePage] || <HomePage />}
+          </main>
+        {/* </div> */}
+      {/* </div> */}
+      <Footer />
     </div>
-  </div>
-);
+  );
+}
+
+// Page components remain the same
+function HomePage() {
+  return (
+    <div>
+      <h1 className="text-3xl font-bold mb-4">Home Page</h1>
+      <p className="text-gray-700">Welcome to our website! This is the home page content.</p>
+    </div>
+  );
+}
+
+function AboutPage() {
+  return (
+    <div>
+      <h1 className="text-3xl font-bold mb-4">About Us</h1>
+      <p className="text-gray-700">Learn more about our company and team.</p>
+    </div>
+  );
+}
+
+function ServicesPage() {
+  return (
+    <div>
+      <h1 className="text-3xl font-bold mb-4">Our Services</h1>
+      <p className="text-gray-700">Discover the services we offer to our clients.</p>
+    </div>
+  );
+}
+
+function ContactPage() {
+  return (
+    <div>
+      <h1 className="text-3xl font-bold mb-4">Contact Us</h1>
+      <p className="text-gray-700">Get in touch with our team for more information.</p>
+    </div>
+  );
+}
 
 export default App;
